@@ -1,0 +1,219 @@
+:root {
+    --bg-color: #cde7ff;
+    --sunmoon-size: 55px;
+    --switch-width: 150px;
+    --switch-height: 65px;
+    --switch-rounded: 50px;
+    --switch-padding-x: 5px;
+    --switch-bg: linear-gradient(to bottom, #73bbff, #a2d1fd);
+    --switch-dark-bg: linear-gradient(to bottom, #2b3347, #181d27);
+    --border-width: 2px;
+    --border-gradient: linear-gradient(to bottom, #a2d1fd, #cde7ff);
+    --border-dark-gradient: linear-gradient(to bottom, #000, #6c7384);
+    --transition: all 0.5s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #73bbff;
+    margin-right: 30px;
+    transition: var(--transition);
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    transition: var(--transition);
+}
+
+body.dark {
+    --bg-color: #535c72;
+}
+
+body.dark h1 {
+    color: #dee5f3;
+    transition: var(--transition);
+}
+
+.switch {
+    position: relative;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    border-radius: var(--switch-rounded);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--switch-bg);
+    transition: var(--transition);
+}
+
+.switch input {
+    display: none;
+}
+
+body.dark .switch {
+    background: var(--switch-dark-bg);
+}
+
+/* We can't animate gradient so let's use a trick here */
+/* It's annimating now */
+
+.switch::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: var(--switch-rounded);
+    background: var(--switch-dark-bg);
+    transition: var(--transition);
+}
+
+body.dark .switch::before {
+    opacity: 1;
+}
+
+.sunmoon {
+    position: absolute;
+    width: var(--sunmoon-size);
+    height: var(--sunmoon-size);
+    border-radius: 50%;
+    background-color: #ffc187;
+    left: var(--switch-padding-x);
+    transition: var(--transition);
+    box-shadow:
+        0 0 11.7px 0 #ffc187,
+        0 0 2px 0 #ffc18768,
+        -2px -2px 5px #ffab5c inset;
+}
+
+body.dark .sunmoon {
+    left: calc(100% - var(--sunmoon-size) - var(--switch-padding-x));
+    background-color: #dee5f3;
+    box-shadow: 0px 0px 51px 0px #dee5f3;
+}
+
+.darkside {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    background-color: #ffc187;
+    transition: var(--transition);
+}
+
+body.dark .darkside {
+    background-color: #565c6b;
+}
+
+.border {
+    position: absolute;
+    top: calc(var(--border-width) * -1);
+    left: calc(var(--border-width) * -1);
+    width: calc(100% + var(--border-width) * 2);
+    height: calc(100% + var(--border-width) * 2);
+    background: var(--border-gradient);
+    border-radius: var(--switch-rounded);
+    z-index: -1;
+    transition: var(--transition);
+}
+
+/* Same trick to animate the gradient */
+
+.border::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: var(--switch-rounded);
+    background: var(--border-dark-gradient);
+    transition: var(--transition);
+}
+
+body.dark .border::after {
+    opacity: 1;
+}
+
+.clouds {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--switch-rounded);
+    overflow: hidden;
+}
+
+.cloud {
+    position: absolute;
+    width: 60%;
+    transition: var(--transition);
+}
+
+.cloud-1 {
+    bottom: -55%;
+    left: 0;
+}
+
+.cloud-2 {
+    bottom: -40%;
+    left: 25px;
+}
+
+.cloud-3 {
+    bottom: -40%;
+    right: 0;
+}
+
+.cloud-4 {
+    bottom: -16%;
+    right: -25px;
+}
+
+body.dark .cloud-1 {
+    bottom: -35%;
+    left: -110px;
+}
+
+body.dark .cloud-2 {
+    bottom: -15%;
+    left: -110px;
+    transition: all 0.7s ease;
+}
+
+body.dark .cloud-3 {
+    bottom: -15%;
+    right: -110px;
+}
+
+body.dark .cloud-4 {
+    bottom: -5%;
+    right: -110px;
+    transition: all 0.7s ease;
+}
+
+.stars {
+    position: absolute;
+    top: 150%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: var(--transition);
+}
+
+body.dark .stars {
+    top: 50%;
+}
